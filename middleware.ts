@@ -6,7 +6,7 @@ export function middleware(request: NextRequest) {
     const isProductRoute = path.startsWith('/products');
     const authToken = request.cookies.get('authToken')?.value;
 
-    if (isProductRoute && !authToken) {
+    if (isProductRoute && authToken == null) {
         const loginUrl = new URL('/login', request.url);
         return NextResponse.redirect(loginUrl);
     }
